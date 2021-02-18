@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .bos {
+      width: 1000px;
+      height: 500px;
+      background: #ccc;
+      font-size: 40px;
+      text-align: center;
+      line-height: 500px;
+      margin: 10px;
+    }
+</style>
+<body>
+    <div class="bos"></div>
+    <script >
+       var bos = document.getElementsByClassName('bos')[0]
+       bos.onmousemove = debouncer(function(e){
+            bos.innerHTML ='X轴'+e.clientX +' ┅ Y轴'+ e.clientY
+        },1000)
+        // 防抖
+        function debounce(fun,delay){
+            let timer;
+            return function(){
+                clearTimeout(timer);
+                timer=setTimeout(()=>{
+                    fun.apply(this,arguments)
+                },delay)
+            }
+        }
+        // 节流
+        function debouncer(fun,delay){
+            let flag = true;
+            return function(){
+                if(!flag){
+                    return
+                }
+                 flag = false
+                 setTimeout(()=>{
+                     fun.apply(this,arguments)
+                     flag = true
+                 },delay) 
+            }
+        }
+        
+    </script>
+</body>
+</html>
